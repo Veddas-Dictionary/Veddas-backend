@@ -28,12 +28,12 @@ mongoose.connect(dbConfig.url, {
 
 // define a simple route
 app.get('/', (req, res) => {
-    res.json({"message": "Welcome to ExpressMongoApp application. Created by IT Jugadu"});
+    res.json({"message": "Welcome to Job alerts of Member directory"});
 });
 
 require('./app/routes/book.routes.js')(app);
 
 // listen for requests
-app.listen(3000, () => {
-    console.log("Server is listening on port 3000");
+app.listen(process.env.PORT || 3000, () => {
+    console.log("Server is listening on port " + process.env.PORT )
 });
