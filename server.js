@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
     res.json({"message": "Welcome to Job alerts of Member directory"});
 });
 
-require('./app/routes/book.routes.js')(app);
+require('./app/routes/job.routes.js')(app);
 
 // listen for requests
 app.listen(process.env.PORT || 3000, () => {

@@ -1,3 +1,3 @@
 module.exports = {
-    url: 'mongodb://localhost:27017/express-mongo-app'
+    url: 'mongodb+srv://nirasha:1CVOHXmNP8iqpaVt@cluster0.bycqq.mongodb.net/WebMemberDirectory?retryWrites=true&w=majority'
 }
