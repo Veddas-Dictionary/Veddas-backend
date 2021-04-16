@@ -2,6 +2,7 @@ const Job= require('../models/job.model.js');
 
 // Create and Save a new Job
 exports.create = (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     // Validate request because in model we required the title
     if(!req.body.title) {
         return res.status(400).send({
@@ -42,6 +43,7 @@ exports.getAll = (req, res) => {
 
 // Get a single job with a jobId
 exports.getById = (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     Job.findById(req.params.jobId)
         .then(oJob => {
             if(oJob) {
@@ -64,6 +66,7 @@ exports.getById = (req, res) => {
 
 // Update a job by the jobId
 exports.update = (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     // Validate Request because title is required
     if(!req.body.title) {
         return res.status(400).send({
@@ -98,6 +101,7 @@ exports.update = (req, res) => {
 
 // Delete the Job with the jobId
 exports.delete = (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     Job.findByIdAndRemove(req.params.jobId)
         .then(oJob => {
             if(oJob) {
