@@ -29,7 +29,7 @@ exports.create = (req, res) => {
 
 // Get all and return all jobs.
 exports.getAll = (req, res) => {
-    response.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Origin', '*');
     Job.find()
         .then(oJob => {
             res.send(oJob);
