@@ -28,7 +28,7 @@ mongoose.connect(dbConfig.url, {
 
 // define a simple route
 app.get('/', (req, res) => {
-    res.json({"message": "Welcome to Job alerts of Member directory"});
+    res.json({"message": "Welcome to Veddas Dictionary Backend"});
 });
 
 require('./app/routes/job.routes.js')(app);
