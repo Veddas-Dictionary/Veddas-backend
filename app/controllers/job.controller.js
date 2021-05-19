@@ -1,123 +1,123 @@
-const Job= require('../models/job.model.js');
+const Word= require('../models/word.model.js');
 
-// Create and Save a new Job
+// Create and Save a new Word
 exports.create = (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     // Validate request because in model we required the title
     if(!req.body.title) {
         return res.status(400).send({
-            message: "Please enter job title."
+            message: "Please enter word title."
         });
     }
 
-    // Create a Job
-    const job = new Job({
+    // Create a Word
+    const word = new Word({
         title: req.body.title,
         description: req.body.description,
         closingDate: req.body.requirements
     });
 
-    // Save Job
-    job.save()
-        .then(oJob => {
-            res.send(oJob);
+    // Save Word
+    word.save()
+        .then(oWord => {
+            res.send(oWord);
         }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while creating the Job."
+            message: err.message || "Some error occurred while creating the Word."
         });
     });
 };
 
-// Get all and return all jobs.
+// Get all and return all words.
 exports.getAll = (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    Job.find()
-        .then(oJob => {
-            res.send(oJob);
+    Word.find()
+        .then(oWord => {
+            res.send(oWord);
         }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while retrieving the job."
+            message: err.message || "Some error occurred while retrieving the word."
         });
     });
 };
 
-// Get a single job with a jobId
+// Get a single word with a wordId
 exports.getById = (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    Job.findById(req.params.jobId)
-        .then(oJob => {
-            if(oJob) {
-                res.send(oJob);
+    Word.findById(req.params.wordId)
+        .then(oWord => {
+            if(oWord) {
+                res.send(oWord);
             }
             return res.status(404).send({
-                message: "Job not exist with id " + req.params.jobId
+                message: "Word not exist with id " + req.params.wordId
             });
         }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Job not exist with id " + req.params.jobId
+                message: "Word not exist with id " + req.params.wordId
             });
         }
         return res.status(500).send({
-            message: "Some error occurred while retrieving the job with jobId " + req.params.jobId
+            message: "Some error occurred while retrieving the word with wordId " + req.params.wordId
         });
     });
 };
 
-// Update a job by the jobId
+// Update a word by the wordId
 exports.update = (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
     // Validate Request because title is required
     if(!req.body.title) {
         return res.status(400).send({
-            message: "Please enter job title."
+            message: "Please enter word title."
         });
     }
 
-    // Find job and update it
-    Job.findByIdAndUpdate(req.params.jobId, {
+    // Find word and update it
+    Word.findByIdAndUpdate(req.params.wordId, {
         title: req.body.title,
         author: req.body.author || "IT jugadu"
     }, {new: true})
-        .then(oJob => {
-            if(oJob) {
-                res.send(oJob);
+        .then(oWord => {
+            if(oWord) {
+                res.send(oWord);
             }
             return res.status(404).send({
-                message: "Job does not exist with jobId " + req.params.jobId
+                message: "Word does not exist with wordId " + req.params.wordId
             });
 
         }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Job does not exist with jobId " + req.params.jobId
+                message: "Word does not exist with wordId " + req.params.wordId
             });
         }
         return res.status(500).send({
-            message: "Some error occurred while updating the job with jobId" + req.params.jobId
+            message: "Some error occurred while updating the word with wordId" + req.params.wordId
         });
     });
 };
 
-// Delete the Job with the jobId
+// Delete the Word with the wordId
 exports.delete = (req, res) => {
     res.set('Access-Control-Allow-Origin', '*');
-    Job.findByIdAndRemove(req.params.jobId)
-        .then(oJob => {
-            if(oJob) {
-                res.send({message: "Job has been deleted successfully!"});
+    Word.findByIdAndRemove(req.params.wordId)
+        .then(oWord => {
+            if(oWord) {
+                res.send({message: "Word has been deleted successfully!"});
             }
             return res.status(404).send({
-                message: "Job not exist with jobId" + req.params.jobId
+                message: "Word not exist with wordId" + req.params.wordId
             });
         }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
-                message: "Job not exist with jobId" + req.params.jobId
+                message: "Word not exist with wordId" + req.params.wordId
             });
         }
         return res.status(500).send({
-            message: "Some error occurred while deleting the job with jobId" + req.params.jobId
+            message: "Some error occurred while deleting the word with wordId" + req.params.wordId
         });
     });
 };
