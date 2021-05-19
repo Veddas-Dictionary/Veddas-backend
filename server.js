@@ -31,9 +31,10 @@ app.get('/', (req, res) => {
     res.json({"message": "Welcome to Veddas Dictionary Backend"});
 });
 
-require('./app/routes/job.routes.js')(app);
+require('./app/routes/word.routes.js')(app);
 
 // listen for requests
 app.listen(process.env.PORT || 3000, () => {
-    console.log("Server is listening on port " + process.env.PORT || 3000)
+    if(process.env.PORT)
+    console.log("Server is listening on port " +  process.env.PORT)
 });
