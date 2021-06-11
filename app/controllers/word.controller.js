@@ -12,9 +12,11 @@ exports.create = (req, res) => {
 
     // Create a Word
     const word = new Word({
-        title: req.body.title,
-        description: req.body.description,
-        closingDate: req.body.requirements
+        VedSi: req.body.VedSi,
+        VedTa: req.body.VedTa,
+        Si: req.body.si,
+        Ta: req.body.ta,
+        En: req.body.en
     });
 
     // Save Word
@@ -61,6 +63,28 @@ exports.getById = (req, res) => {
         return res.status(500).send({
             message: "Some error occurred while retrieving the word with wordId " + req.params.wordId
         });
+    });
+};
+
+// Get a word by a search
+exports.search = (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    //db.Sugesstions.find({$text:{$search:req.params.word}})
+    Word.find({$text:{$search:"/.*"+req.params.searchTerm+",*/"}})
+        .then(oWord => {
+            if(oWord) {
+                res.send(oWord);
+            }
+            return res.status(404).send({
+                message: "Word not exist with search term " + req.params.searchTerm
+            });
+        }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Word not exist with search term " + req.params.searchTerm
+            });
+        }
+        console.log(err);
     });
 };
 

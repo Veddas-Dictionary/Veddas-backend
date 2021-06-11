@@ -12,6 +12,9 @@ const WordSchema = mongoose.Schema({
     Si: String,
     Ta: String,
     En: String
+    },
+    {
+        collection:'Sugesstions'
     }
 );
 
