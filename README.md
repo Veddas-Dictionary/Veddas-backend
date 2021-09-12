@@ -1,6 +1,9 @@
 # Veddas Dictionary Backend
 Rest API for veddas dictionary based on the demo by IT Jugadu.
 
+## See the live running dictionary
+[veddas.ga](https://veddas.ga/)
+
 ## Steps to Setup
 
 1. Install dependencies
